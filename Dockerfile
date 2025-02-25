@@ -4,5 +4,5 @@ COPY . .
 
 RUN cargo build --release 
 
-CMD ["/app/target/release/fibbot"]
+ENTRYPOINT ["/app/target/release/fibbot"]
 
