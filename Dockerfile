@@ -1,4 +1,4 @@
-FROM rust:slim-bullseye
+FROM rust:latest
 
 # WORKDIR /app
 
@@ -12,6 +12,8 @@ COPY . .
 
 RUN cargo build --release 
 
+ENTRYPOINT ["/app/target/release/fibbot"]
+
 # Compress the binary using upx
 # RUN upx --best target/release/fibbot
 
@@ -19,5 +21,3 @@ RUN cargo build --release
 # FROM scratch
 
 # COPY --from=build-env /app/target/release/fibbot .
-
-ENTRYPOINT ["./app/target/release/fibbot"]
