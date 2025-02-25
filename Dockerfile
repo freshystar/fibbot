@@ -20,4 +20,4 @@ RUN cargo build --release
 
 # COPY --from=build-env /app/target/release/fibbot .
 
-ENTRYPOINT ["/app/target/release/fibbot"]
+ENTRYPOINT ["./app/target/release/fibbot"]
