@@ -12,7 +12,7 @@ COPY . .
 
 RUN cargo build --release 
 
-Cmd ["/app/target/release/fibbot"]
+CMD ["/app/target/release/fibbot"]
 
 # Compress the binary using upx
 # RUN upx --best target/release/fibbot
