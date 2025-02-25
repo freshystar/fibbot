@@ -1,5 +1,20 @@
-name: 'My Hello World action'
-description: 'A rust program that prints Hello world'
+name: "My fibbot"
+description: "A rust program that prints Hello world"
+inputs:
+  enable_fib:
+    description: "Enabling fibonnaci"
+    required: true
+    default: "false"
+  max_threshold:
+    description: "The maximum nuber of fibbonacci that will be done"
+    required: true
+    default: "1000"
+outputs:
+  input-parse:
+    description: "Output printed to logs"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.enable_fib}}
+    - ${{ inputs.max_threshold }}

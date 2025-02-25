@@ -20,4 +20,4 @@ FROM scratch
 
 COPY --from=build-env /app/target/release/fibbot .
 
-CMD ["./fibbot"]
+ENTRYPOINT ["/app/target/release/fibbot"]
