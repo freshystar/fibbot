@@ -9,9 +9,9 @@ jobs:
       - name: Run Fibbot
         id: input-parse
         uses: ./
-        with:
-          enable_fib: false
-          max_threshold: '1000'
+      #   with:
+      #     enable_fib: false
+      #     max_threshold: '1000'
 
-      - name: display output
-        run: echo "The inputs are ${{ steps.inputs.outputs.enable_fib }} and ${{ steps.inputs.outputs.max_threshold }}" 
+      # - name: display output
+      #   run: echo "The inputs are ${{ steps.inputs.outputs.enable_fib }} and ${{ steps.inputs.outputs.max_threshold }}" 
