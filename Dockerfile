@@ -1,4 +1,4 @@
-FROM rust:alpine AS build-env
+FROM rust:alpine
 
 WORKDIR /app
 
