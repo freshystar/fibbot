@@ -1,6 +1,6 @@
 FROM rust:alpine
 
-WORKDIR /app
+# WORKDIR /app
 
 # COPY Cargo.toml Cargo.lock ./
 
