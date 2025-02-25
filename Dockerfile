@@ -1,23 +1,13 @@
-FROM rust:alpine AS build-env
+FROM rust:alpine AS builder
 
-WORKDIR /app
+WORKDIR /usr/src/fibbot
 
-COPY Cargo.toml Cargo.lock ./
+COPY . .
 
-# Copy the source code
-COPY src ./src
+RUN cargo build --release 
 
-# Install necessary build dependencies
-RUN apk add --no-cache musl-dev upx
+FROM alpine:latest
 
-RUN cargo build --release
+COPY --from=builder /usr/src/fibbot/target/release/fibbot /
 
-# Compress the binary using upx
-RUN upx --best target/release/fibbot
-
-# Use a minimal base image for the final image
-FROM scratch
-
-COPY --from=build-env /app/target/release/fibbot .
-
-ENTRYPOINT ["/app/target/release/fibbot"]
+CMD ["./fibbot"] 
