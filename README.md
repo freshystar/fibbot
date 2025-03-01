@@ -1,3 +1,7 @@
+
+[![Fibonacci](https://github.com/freshystar/fibbot/actions/workflows/build.yml/badge.svg)](https://github.com/freshystar/fibbot/actions/workflows/build.yml)
+
+
 ## FibBot Github Action
 #### Overview
 
@@ -11,11 +15,11 @@ This action prints "Hello World" to the `action.log`.
 
 #### Example usage
 
-```
+```rs
 uses: actions/fibbot@v1
 ```
 In my case, I used:
-```
+```rs
  - name: Run Rust Action
         uses: ./  # Points to your action
         with:
@@ -24,7 +28,7 @@ In my case, I used:
 
 ### Parameter parsing
  After updating my `action.yml` file, I can now receive and process inputs from the Github worflow:
-```
+```rs
 - name: Run Rust Action
         uses: ./  # Points to your action
         with:
@@ -32,7 +36,22 @@ In my case, I used:
           max_threshold: "50"
 ```
 
-### Logic  Developmant
-A robust fibonacci function with tests
+### Logic  Development
+
+In this repository, you will find a file `fibbonacci.rs` under the `src` directory which contains a robust **fibonacci** function.
+Here's a brief overview of the logic:
+```rs
+ while i < num {
+            let temp = b;
+            b = &temp + a;
+            a = temp;
+            i += 1;
+ }
+ ```
+
+### Full Workflow Testing
+
+After several updates and implementations, we now have an action that can be successfully executed on pull requests, extract numbers and return their fibonacci with a comment.
+
 
 
