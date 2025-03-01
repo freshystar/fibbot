@@ -26,7 +26,6 @@ In my case, I used:
         with:
 ```
 
-
 ### Parameter parsing
  After updating my `action.yml` file, I can now receive and process inputs from the Github worflow:
 ```rs
