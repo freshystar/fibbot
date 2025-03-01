@@ -5,6 +5,7 @@ use crate::{extract::Extract, fibbonacci::Fibonacci};
 #[derive(Clone, Copy)]
 pub struct ExtractNumbers;
 
+
 impl ExtractNumbers {
     pub fn extract_number(content: &str) -> Vec<BigInt> {
         let extract_var = Extract::from(content);

@@ -1,5 +1,6 @@
 name: "My fibbot"
 description: "A rust program that prints Hello world and handles parameters"
+
 inputs:
   enable_fib:
     description: "Enabling fibonnaci"

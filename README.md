@@ -18,6 +18,7 @@ This action prints "Hello World" to the `action.log`.
 ```rs
 uses: actions/fibbot@v1
 ```
+
 In my case, I used:
 ```rs
  - name: Run Rust Action

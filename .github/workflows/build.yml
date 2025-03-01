@@ -6,7 +6,6 @@ on:
 permissions:
   pull-requests: write
   contents: read
-
 jobs:
   test-action:
     runs-on: ubuntu-latest
@@ -30,7 +29,7 @@ jobs:
 
       - name: Run Fibbot
         id: input-parse
-        uses: freshystar/fibbot@main
+        uses: ./
         with:
           enable_fib: "true"
           max_threshold: "100"
