@@ -32,9 +32,10 @@ jobs:
         id: input-parse
         uses: freshystar/fibbot@main
         with:
-          pr_number: ${{ github.event.pull_request.number }}
           enable_fib: "true"
           max_threshold: "100"
+        env:
+          pr_number: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     
