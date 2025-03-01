@@ -81,7 +81,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     } else {
-        println!("Fibbot disabled...");
+        println!("Fibbot disabled....");
     }
 
     // let pr = GettingPr::get_pr_body(1);
