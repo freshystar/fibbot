@@ -3,6 +3,7 @@ use std::env;
 use dotenv::dotenv;
 use extract::Extract;
 use fibbonacci::Fibonacci;
+use get_pull::ExtractNumbers;
 // use get_pull::GettingPr;
 use num_bigint::BigInt;
 use pull::PullRequest;
@@ -19,8 +20,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         // println!("{}", argument_1);
         // println!("{}", argument_2);
     }
-
-    //let _ = dotenv().is_ok();
+    let _ = dotenv().is_ok();
     let github_token = env::var("GITHUB_TOKEN").unwrap_or_else(|_| "".to_string());
     let github_repository =
         env::var("GITHUB_REPOSITORY").unwrap_or_else(|_| "freshystar/fibbot".to_string());
@@ -28,29 +28,59 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let owner = github_repository[0];
     let repo = github_repository[1];
 
+    let pr_number = env::var("PR_number")
+        .unwrap_or_else(|_| "2".to_string())
+        .parse::<u64>()
+        .expect("Invalid PR_number");
+
     let value = octocrab::instance()
         .pulls("freshystar", "fibbot")
         .list_files(1)
         .await?;
 
+        
     let value = &value.items.first().unwrap().patch.clone().unwrap();
 
     let enable_fib = env::var("INPUT_ENABLE_FIB").unwrap_or_else(|_| "true".to_string());
-    let max_threshold = env::var("INPUT_MAX_THRESHOLD").unwrap_or_else(|_| "100".to_string());
 
-    //println!("{:?}", value);
-
-    //let var: &str = "h3110 23 cat 444 45 bf5  rabbit 11 2 dog";
-
+    
     if enable_fib.eq("true") {
         println!("fibbot enabled...");
-        let extract_var = Extract::from(value);
-        let mut number_fib: Vec<BigInt> = Vec::new();
-        for i in extract_var {
-            let num = Fibonacci::fibo(i.into());
-            number_fib.push(num);
+
+        let max_threshold = env::var("INPUT_MAX_THRESHOLD").unwrap_or_else(|_| "100".to_string());
+        println!("Max-threshold: {} ", max_threshold);
+
+        let pull_request_file = pull::PullRequest::get_pr(&owner, &repo, pr_number).await?;
+
+        for file in pull_request_file {
+            if let Some(patch) = file.patch {
+                println!("{:?}", ExtractNumbers::extract_number(&patch));
+
+                let extracted_numbers = ExtractNumbers::extract_number(&patch);
+
+                let fib_of_extracted_numbers: Vec<BigInt> = extracted_numbers.clone()
+                    .into_iter()
+                    .filter(|x| x < &max_threshold.parse::<BigInt>().unwrap())
+                    .map(|x| Fibonacci::fibo(x.into()))
+                    .collect();
+
+                let pr_file_name = &file.filename;
+
+                println!(
+                    "fibonacci of found numbers {:?} in {} is: {:?}",
+                    extracted_numbers, pr_file_name, fib_of_extracted_numbers
+                );
+
+                let comment_body = format!("The fibonacci of {:?} is: {:?}", extracted_numbers, fib_of_extracted_numbers);
+
+                PullRequest::post_comment_to_pr(
+                    repo,
+                    comment_body.as_str(),
+                    pr_number,
+                )
+                .await?;
+            }
         }
-        println!("{:?}", number_fib);
     } else {
         println!("Fibbot disabled...");
     }
@@ -61,9 +91,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-
-
 mod extract;
 mod fibbonacci;
-mod pull;
 mod get_pull;
+mod pull;
