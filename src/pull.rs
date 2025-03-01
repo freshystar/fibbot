@@ -10,7 +10,7 @@ impl PullRequest {
     }
 
     pub async fn post_comment_to_pr(repo: &str, pr_content: &str, pr_number: u64) -> Result<(), reqwest::Error> {
-        let github_token = env::var("GITHUB_TOKEN").expect("GitHub_TOKEN not set");
+        let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
     
         let url = format!(
             "https://api.github.com/repos/{}/issues/{}/comments",
