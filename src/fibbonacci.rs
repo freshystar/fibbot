@@ -6,7 +6,6 @@ impl Fibonacci {
     pub fn fibo(num: BigInt) -> BigInt {
         let mut a: BigInt = 0.to_bigint().unwrap();
         let mut b: BigInt = 1.to_bigint().unwrap();
-        //println!("Fibonacci number of term {}:", num);
 
         let mut i: BigInt = 0.to_bigint().unwrap();
         let num = num.to_bigint().unwrap();
