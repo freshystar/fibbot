@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Fibbot
         id: input-parse
-        uses: freshystar/fibbot@main
+        uses: ./
         with:
           pr_number: ${{ github.event.pull_request.number }}
           enable_fib: "false"
