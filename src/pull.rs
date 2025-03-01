@@ -10,19 +10,17 @@ impl PullRequest {
     }
 
     
-    pub async fn post_comment_to_pr(repo: &str, pr_content: &str, pr_number: u64) -> Result<(), reqwest::Error> {
-        let github_token = env::var("INPUT_GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
+    pub async fn post_comment_to_pr(owner: &str, repo: &str, pr_content: &str, pr_number: u64) -> Result<(), reqwest::Error> {
+        let github_token = env::var("GITHUB_TOKEN").expect("GITHUB_TOKEN not set");
     
         let url = format!(
-            "https://api.github.com/repos/{}/issues/{}/comments",
-            repo, pr_number
-        );
+            "https://api.github.com/repos/{owner}/{repo}/issues/{pr_number}/comments");
     
         let client = Client::new();
         let response = client
             .post(&url)
             .header("Authorization", format!("Bearer {}", github_token))
-            .header("User-Agent", "FibBot")
+            .header("User-Agent", "{owner}")
             .header("Accept", "application/vnd.github.full+json")
             .json(&serde_json::json!({ "body": pr_content }))
             .send()
