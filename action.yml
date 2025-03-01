@@ -9,7 +9,8 @@ inputs:
   max_threshold:
     description: "The maximum nuber of fibbonacci that will be done"
     required: true
-    default: "500"
+    default: "100"
+
 runs:
   using: "docker"
   image: "Dockerfile"

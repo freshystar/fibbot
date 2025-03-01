@@ -2,7 +2,7 @@ use std::env;
 
 use dotenv::dotenv;
 use extract::Extract;
-use fibonnaci::Fibonacci;
+use fibbonacci::Fibonacci;
 use get_pull::ExtractNumbers;
 // use get_pull::GettingPr;
 use num_bigint::BigInt;
@@ -81,7 +81,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     } else {
-        println!("Fibbot disabled....");
+        println!("Fibbot disabled...");
     }
 
     // let pr = GettingPr::get_pr_body(1);
@@ -93,6 +93,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 
 mod extract;
-mod fibonnaci;
+mod fibbonacci;
 mod get_pull;
 mod pull;
