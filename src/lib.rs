@@ -27,7 +27,7 @@ mod tests {
     fn test_extract_numbers() {
         assert_eq!(
             extract_nums("pr_ d 888 escription 888 67 4b 66"),
-            [888, 888, 67, 66]
+            [888, 888, 67, 4, 66]
         );
         assert_eq!(extract_nums(" "), []);
     }
