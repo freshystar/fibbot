@@ -9,6 +9,5 @@ pub fn extract_number(content: &str) -> Vec<BigInt> {
         let num = fibo(i.into());
         number_fib.push(num);
     }
-    // println!("{:?}", number_fib);
     number_fib
 }
