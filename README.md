@@ -21,7 +21,7 @@ uses: actions/fibbot@v1
 In my case, I used:
 ```rs
  - name: Run Rust Action
-        uses: freshystar/fibbot@main # Points to your action
+        uses: ./ # Points to your action
         with:
 ```
 
