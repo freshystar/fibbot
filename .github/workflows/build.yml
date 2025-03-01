@@ -1,7 +1,7 @@
 name: Run Rust Action
 on: 
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
 
 permissions:
   pull-requests: write
@@ -17,16 +17,24 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Get PR number
+        run: |
+          if [[ -n "${{ github.event.pull_request }}" ]]; then
+            echo "PR Number: ${{ github.event.pull_request.number }}"
+            echo "PR_number=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+          else
+            echo "No pr found."
+          fi
 
       - name: Run Fibbot
         id: input-parse
-        uses: ./
+        uses: freshystar/fibbot@main
         with:
           pr_number: ${{ github.event.pull_request.number }}
           enable_fib: "false"
           max_threshold: "100"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: display output
-      #   run: echo "The inputs are ${{ steps.input-parse.outputs.enable_fib }} and ${{ steps.input-parse.outputs.max_threshold }}"
+    
