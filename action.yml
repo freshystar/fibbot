@@ -9,9 +9,6 @@ inputs:
     description: "The maximum nuber of fibbonacci that will be done"
     required: true
     default: "500"
-outputs:
-  input-parse:
-    description: "Output printed to logs"
 runs:
   using: "docker"
   image: "Dockerfile"
