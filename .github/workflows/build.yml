@@ -32,7 +32,7 @@ jobs:
         uses: ./
         with:
           pr_number: ${{ github.event.pull_request.number }}
-          enable_fib: "false"
+          enable_fib: "true"
           max_threshold: "100"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
