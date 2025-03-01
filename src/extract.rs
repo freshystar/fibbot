@@ -1,15 +1,12 @@
-pub struct Extract;
+   /// Here we are going to be using regex to extract the numbers
+/// This is good in that it can get all numbers
+use regex::Regex;
 
-impl Extract {
-    pub fn from(val: &str) -> Vec<u128> {
-        let txt_vec: Vec<String> = val.split_whitespace().map(String::from).collect();
-        let mut result: Vec<u128> = Vec::new();
+pub fn extract_nums(string:&str) -> Vec<u128>{
+    let nums = Regex::new(r"[0-9]+").unwrap();
 
-        for i in txt_vec {
-            if i.parse::<u128>().is_ok() {
-                result.push(i.parse().unwrap());
-            }
-        }
-        result
-    }
+    let nums = nums.find_iter(string)
+        .filter_map(|mat| mat.as_str().parse::<u128>().ok())
+        .collect();
+    nums
 }
