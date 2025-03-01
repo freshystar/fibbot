@@ -1,6 +1,6 @@
 name: Run Rust Action
 on: 
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened]
 
 permissions:
