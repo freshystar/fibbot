@@ -51,7 +51,7 @@ Here's a brief overview of the logic:
 
 ### Full Workflow Testing
 
-After several updates and implementations, we now have an action that can be successfully executed on pull requests, extract numbers and return their fibonacci with a comment.
+After several updates and implementations, we now have an action that can be successfully executed on pull requests, extract numbers and return their fibonacci in a comment.
 
 
 
