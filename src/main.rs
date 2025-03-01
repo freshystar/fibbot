@@ -2,6 +2,7 @@ use std::env;
 
 use dotenv::dotenv;
 use extract::Extract;
+//use extract::Extract;
 use fibbonacci::Fibonacci;
 use get_pull::ExtractNumbers;
 // use get_pull::GettingPr;
@@ -16,12 +17,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // } else {
     //     let argument_1 = &args[1];
     //     let argument_2 = &args[2];
-        println!("Hello, world!");
-        // println!("{}", argument_1);
-        // println!("{}", argument_2);
-    //}
+    //     println!("Hello, world!");
+    //     // println!("{}", argument_1);
+    //     // println!("{}", argument_2);
+    // }
     let _ = dotenv().is_ok();
-    // let github_token = env::var("INPUT_GITHUB_TOKEN").unwrap_or_else(|_| "".to_string());
+   // let github_token = env::var("GITHUB_TOKEN").unwrap_or_else(|_| "".to_string());
     let github_repository =
         env::var("GITHUB_REPOSITORY").unwrap_or_else(|_| "freshystar/fibbot".to_string());
     let github_repository = github_repository.split("/").collect::<Vec<&str>>();
@@ -38,8 +39,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     //     .list_files(1)
     //     .await?;
 
-
-    // let value = &value.items.first().unwrap().patch.clone().unwrap();
+    //let value = &value.items.first().unwrap().patch.clone().unwrap();
 
     let enable_fib = env::var("INPUT_ENABLE_FIB").unwrap_or_else(|_| "true".to_string());
 
@@ -54,13 +54,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         for file in pull_request_file {
             if let Some(patch) = file.patch {
-                println!("{:?}", ExtractNumbers::extract_number(&patch));
+                println!("{:?}", Extract::from(&patch));
 
-                let extracted_numbers = ExtractNumbers::extract_number(&patch);
+                let extracted_numbers = Extract::from(&patch);
 
                 let fib_of_extracted_numbers: Vec<BigInt> = extracted_numbers.clone()
                     .into_iter()
-                    .filter(|x| x < &max_threshold.parse::<BigInt>().unwrap())
+                    .filter(|x| x < &max_threshold.parse::<u128>().unwrap())
                     .map(|x| Fibonacci::fibo(x.into()))
                     .collect();
 
