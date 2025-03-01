@@ -38,6 +38,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .list_files(1)
         .await?;
 
+
     let value = &value.items.first().unwrap().patch.clone().unwrap();
 
     let enable_fib = env::var("INPUT_ENABLE_FIB").unwrap_or_else(|_| "true".to_string());
@@ -70,6 +71,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     extracted_numbers, pr_file_name, fib_of_extracted_numbers
                 );
 
+                
                 let comment_body = format!("The fibonacci of {:?} is: {:?}", extracted_numbers, fib_of_extracted_numbers);
 
                 PullRequest::post_comment_to_pr(
