@@ -1,6 +1,6 @@
 use num_bigint::BigInt;
 
-use crate::{extract::Extract, fibonnaci::Fibonacci};
+use crate::{extract::Extract, fibbonacci::Fibonacci};
 
 #[derive(Clone, Copy)]
 pub struct ExtractNumbers;
