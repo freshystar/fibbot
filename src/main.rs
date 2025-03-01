@@ -1,6 +1,7 @@
 use std::env;
 
 use dotenv::dotenv;
+use extract::Extract;
 //use extract::Extract;
 use fibbonacci::Fibonacci;
 use get_pull::ExtractNumbers;
@@ -53,13 +54,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         for file in pull_request_file {
             if let Some(patch) = file.patch {
-                println!("{:?}", ExtractNumbers::extract_number(&patch));
+                println!("{:?}", Extract::from(&patch));
 
-                let extracted_numbers = ExtractNumbers::extract_number(&patch);
+                let extracted_numbers = Extract::from(&patch);
 
                 let fib_of_extracted_numbers: Vec<BigInt> = extracted_numbers.clone()
                     .into_iter()
-                    .filter(|x| x < &max_threshold.parse::<BigInt>().unwrap())
+                    .filter(|x| x < &max_threshold.parse::<u128>().unwrap())
                     .map(|x| Fibonacci::fibo(x.into()))
                     .collect();
 
